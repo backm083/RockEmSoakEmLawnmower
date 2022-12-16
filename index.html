@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<title>5611 HW1</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<style>
+body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
+.w3-bar,h1,button {font-family: "Montserrat", sans-serif}
+.fa-anchor,.fa-coffee {font-size:200px}
+</style>
+</head>
+<body>
+
+<!-- Navbar -->
+<div class="w3-top">
+  <div class="w3-bar w3-red w3-card w3-left-align w3-large">
+    <a class="w3-bar-item w3-button w3-hide-medium w3-hide-large w3-right w3-padding-large w3-hover-white w3-large w3-red" href="javascript:void(0);" onclick="myFunction()" title="Toggle Navigation Menu"><i class="fa fa-bars"></i></a>
+    <a href="#" class="w3-bar-item w3-button w3-padding-large w3-white">Home</a>
+    <a href="RockEmSoakEmLawnmower.zip" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white">Download Game</a>
+    <a href="presentation.html" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white">Presentation Video</a>
+  </div>
+
+  <!-- Navbar on small screens -->
+  <div id="navDemo" class="w3-bar-block w3-white w3-hide w3-hide-large w3-hide-medium w3-large">
+    <a class="w3-bar-item w3-button w3-hide-medium w3-hide-large w3-right w3-padding-large w3-hover-white w3-large w3-red" href="javascript:void(0);" onclick="myFunction()" title="Toggle Navigation Menu"><i class="fa fa-bars"></i></a>
+    <a href="#" class="w3-bar-item w3-button w3-padding-large w3-white">Home</a>
+    <a href="RockEmSoakEmLawnmower.zip" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white">Download Game</a>
+  </div>
+</div>
+
+<!-- Header -->
+<header class="w3-container w3-red w3-center" style="padding:128px 16px">
+  <h1 class="w3-margin w3-jumbo">5611 Final Project</h1>
+  <h2>Rock'em Soak'em Lawnmower</h2>
+  <p class="w3-xlarge">Alex Backman (Undergraduate)</p>
+</header>
+
+<!-- First Grid -->
+<div class="w3-row-padding w3-padding-64 w3-container" id="Assignment 1">
+  <div class="w3-content">
+    <p>
+      The goal of this project was to make a "bullet hell" game with some Procedural Content Generation. The term "bullet hell" refers to a sub-genre of shooters whose gameplay focuses on dodging waves of colored bullets while simultaneously shooting at enemies. To make such a game, something to generate these projectiles would be the core of the game. Once an emitter of these projectiles is obtained the next matter is randomizing the parameters that define the projectiles. Now, I didn’t make this from scratch as this type of game has existed for quite a while. After looking around, <a href="https://github.com/jongallant/Unity-Bullet-Hell">this github</a> was found which looked promising. It was an impressive looking emitter of projectiles with many configurable parameters such as rotation speed, grouping of bullets, speed, acceleration, etc. It is however a little lacking in the documentation, which proved be problematic later. While this was a great base it lacked the ability to change some of the parameters from outside the class such as the number of “spokes” this being how many groups of bullets will spawn at each time around the emitter. A a summary of how works is as follows. It uses a singleton projectile manager which will manage an array of emitters. These emitters have a projectile object which itself has its own parameters. The emitter will manage its projectiles and the manager manages all the emitters. It also uses object pools in Unity to allow for the creation of many bullets at a time. Object pooling is where all the objects are pre-instantiated at run time to avoid needing to create new ones and delete old ones. This allows there to be thousands of projectiles on screen with no problem (well my laptop started slowing down at a little over 2,000 projectiles). This is the main computational bottleneck although if one wants to generate more than this many projectiles on the screen at once, there isn’t going to be any open space. So, while it is technically a bottleneck, the need to ever exceed this isn’t likely for most use cases. 
+    </p>
+  </div>
+
+</div>
+
+<div class="w3-row-padding w3-light-grey w3-padding-64 w3-container" id="Assignment 2">
+  <div class="w3-center">
+    <!--<video width="480" height="300" controls><source src="BulletHellAlpha.mp4" type ="video/mp4">Your browser doesn't support the video tag</video>-->
+    <img src = "BulletHellAlpha.gif">
+    <p>
+      Above is it looked like when the bullet hell github was imported. Two emitters are spawned in on the scene, collisions on the player and health were added.
+    </p>
+  </div>
+</div>
+
+
+<div class="w3-row-padding w3-padding-64 w3-container" id="Assignment 1">
+  <div class="w3-content">
+    One of the first things I did was get some tiles to make the environment. I found some assets on the Unity store that were some <a href="https://assetstore.unity.com/packages/2d/environments/pixel-art-top-down-basic-187605">grass and wall tile sets</a>. These were used to create the environment. After seeing the grass with the flowers, a friend mentioned that it looks like a lawn and that the player should be a <a href="https://forums.rpgmakerweb.com/index.php?threads/lawnmower.75054/">lawnmower</a>. So, that is the game. The enemy of lawnmowers are branches and rocks. So, the main enemy is a crazy rock that litters the lawn with rocks. Therefore, the lawnmower shoots rocks because it keeps running over them. The rock is magical and summons magic turrets that also shoot at the player (The summoning circle sprite came with the tile set). The rock was the only asset that wasn’t borrowed from somewhere else. It has been animated to have spinning eyes with a sprite sheet. This is related to keyframes which were briefly brought up in class. It takes some lose inspiration from Everything, Everywhere, All at Once with the googly eyed rocks which is what I was going for. Two more gameplay related mechanics are that the player is a futuristic mower may also press the “E” key to gain a temporary shield that has a cooldown. They may also hold the shift key to enter Ludicrous speed (Nothing too special happens here other than moving twice as fast but would be a cool thing to add an animation for in the future).
+  </div>
+</div>
+
+<div class="w3-row-padding w3-light-grey w3-padding-64 w3-container" id="Assignment 2">
+  <div class="w3-center">
+    <!--<video width="480" height="300" controls><source src="BulletHellAlpha.mp4" type ="video/mp4">Your browser doesn't support the video tag</video>-->
+    <img src = "lawnmowerSpriteSheet.png">
+    <img src = "CrazyRock.gif">
+  </div>
+</div>
+
+<div class="w3-row-padding w3-padding-64 w3-container" id="Assignment 1">
+  <div class="w3-content">
+    One issue I ran into was creating more emitters at runtime. I was originally going to have enemies spawn into the room that would be randomly configured emitters. However, creating and destroying these emitters causes lots of issues, generally ending in a crash, which I think is related to the object pooling. I spent a lot of time trying to get this working. There was a comment in the code that showed a way to add an emitter at runtime supposedly, but I couldn’t get it to work. So, this was worked around by having the scene just contains the rock boss emitter and four turret emitters. They have their renderer disabled when they aren’t “alive” and set the TTL (time to live) on the projectiles to 0 so they aren’t shooting. The rock will start spawned in. After 30 seconds or enough damage is dealt the rock will enter a new “phase”. It will pick one of the four turrets currently in the scene and enable the renderer if it isn’t already and tell it to randomize its parameters again. The rock will then re-randomize its patterns as well. This will accomplish the effect of having the player experience a variety of patterns. When the rock is defeated, it will fade out. A timer will run then after the expiration all its parameters will be reset and it will be moved to a random location in the room. This gives the illusion of a new enemy spawning, but it’s just the same rock. Hacky methods like this to achieve good results is something I have learned in this class. Although, doing it this way would cause some scaling issues if one wanted to create mutliple rooms and had to preplace everything instead of generating it at runtime, thus it is kind of a self-imposed computational bottleneck.
+  </div>
+  <br>
+  <div class="w3-content">
+    The main difference between the turrets (later to be named sprinklers to match the theme) and the rock is that the turret locations are randomized at the beginning of the game and do not change. The player will see them fade out as the game starts so they have a rough idea of where they are located. This is to reduce the risk of them just spawning on top of the player randomly. Another difference is that one decision the rock will make when starting a new phase is whether he will be moving or standing still via a coin flip. It was found that movement can create radically different patterns as the origin of the bullets is changing opposed to the same pattern while sitting still. When the rock is moving, he will always move towards the player. Another mechanic that was breifely mentioned is the shield. This makes the player invincible for a short duration. This was included as not all the patterns are guaranteed to be “dodge-able” especially with the turrets potentially spraying bullets at you on both sides.  
+  </div>
+  <br>
+  <div class="w3-content">
+    Another issue that was encountered was registering the collisions for the bullets. Checking for intersections and collisions was done frequently in this class and projects, but this provided a slightly different challenge. This is because colliders or bounding boxes for the rock and lawnmower needed to let their own bullets not collide with them, but to also be able to collide with anything else such as enemies and walls. This was fixed on the boss by changing its collider to a trigger, this means that it has no physics, but anything that enters it will cause a trigger. This allows the rocks projectiles to not immediately de-spawn as they are no longer spawning inside a physical object. This does remove the ability for the rock to collide with the walls, but that is fine as it stands still or chases the player who is constrained by the walls. The player was fixed by moving the spawner outside of the lawnmower’s collider. This is the white dot by the lawnmower which could be considered the tool to aim but is also where the emitter for the player’s projectiles is located. How the collisions were detected with the bullets was using a circle cast which is conceptually like the in-class exercise we did with the line-circle intersect except it is a line of circles instead of a line checking for intersection.
+  </div>
+  <br>
+  </div>
+
+  <div class="w3-row-padding w3-light-grey w3-padding-64 w3-container" id="Assignment 2">
+    <div class="w3-center">
+      <video width="480" height="300" controls><source src="ColliderVsTrigger.mp4" type ="video/mp4">Your browser doesn't support the video tag</video>
+      <p>Here the collider for the rock is turned off from being a trigger so the bullets the rock shoots immediately disappear. Also a fun interaction at the end as both the lawnmower and rock now have rigidbodies that can interact(another thing that was talked about in class)</p>
+    </div>
+  </div>
+
+
+<div class="w3-row-padding w3-padding-64 w3-container" id="Assignment 1">
+  <div class="w3-content">
+    Another feature from class that was considered was bouncing projectiles. This would simply be reflecting the projectiles off the walls or enemies/player. This however to make the game a little too chaotic, especially with longer TTLs as the entire screen could be covered in bullets at times. Additionally, it introduced some complications such as having the ball bounce off the rock, but the rock walks back into it and it kind of gets stuck damaging the boss for a lot before it finally jostles itself away. So, this feature was thrown out.
+  </div>
+  <br>
+  <div class="w3-content">
+    It should be noted that the original inspiration for this was a research paper titled Talakat: Bullet Hell Generation through Constrained Map-Elites. They used a grammar based PCG and AI algorithm to create playable bullet hell levels.  I originally planned to use a grammar based one as well but found it to unnecessarily complicate what I needed to do. This was partially because there wasn’t really any clean way to integrate the grammar generators that I had found into my project efficiently. This is exactly the kind of problem that GIGL: A Domain Specific Language for Procedural Content Generation with Grammatical Representations was aiming to solve. So, if I had used C++ this work might be exactly what I needed. While doing it without a grammar perhaps wasn’t as elegant it is certainly doable. The main problem is controlling the generation of parameters that affect other parameters as well as constraints. This comes naturally with the use of a grammar, but I was forced to create weird if then branches and scale random ranges for parameters by the output of other ranges. For example, I made it, so the bullet’s maximum speed is scaled down by its size. The bigger it is the smaller the ranges of speeds it can have. For example, the smallest bullet can have a speed anywhere between 0.15-4, but the largest can only have a speed between 0.15-1. This idea was applied to many parameters to avoid the creation of useless or unfun patterns. One such pattern was on display when we showed our projects in class. It showed one where the acceleration of the bullets was negative with an already low speed which essentially just made a dot as all the projectiles piled on each other. The constrained Map-Elites algorithm solves this manual parameter tuning by using AI, so my method is simply what-ever “seems good” and lots of little adjustments which took a fair amount of time.
+  </div>
+</div>
+
+<div class="w3-row-padding w3-light-grey w3-padding-64 w3-container" id="Assignment 2">
+  <div class="w3-center">
+    <!--<video width="480" height="300" controls><source src="BulletHellAlpha.mp4" type ="video/mp4">Your browser doesn't support the video tag</video>-->
+    <img src = "OriginalGoal.png">
+    <img src = "ParametersToAdjust.png">
+    <p>
+      The first is from <i>Talakat: Bullet Hell Generation through Constrained Map-Elites</i> which what I was hoping to mimic. The second is the list of configurable parameters for the emitters
+    </p>
+  </div>
+</div>
+
+<div class="w3-row-padding w3-padding-64 w3-container" id="Assignment 1">
+  <div class="w3-content">
+    After viewing the video some feedback that was received included making the UI look nicer, avoid generation of patterns like the one described above, and making the bullets contrast the background more. It was also unanimously voted that it should be more difficult. They only saw a small portion of the patterns so they didn’t really see how difficult it can get (even after tuning the parameters there are a couple patterns that may be considered impossible to avoid without taking damage). Aside from this, the turrets were turned into “sprinklers” to fit the lawn theme by making the bullets blue. The rock’s bullets were turned into a more varied color gradient that stands out on the background more than the original orange. The UI was touched up by replacing the bland white text indicating the health with actual health bars. I was able to lerp the red and green colors of the health bars to have them change color as the health gets lower. We talked about lerp a bit in class and on this topic it was also used for the fade in and fade out animations for the enemies (this was done by lerping the alpha). Lastly, the score was made a bold red text to stand out as well.
+  </div>
+</div>
+
+<div class="w3-row-padding w3-light-grey w3-padding-64 w3-container" id="Assignment 2">
+  <div class="w3-center">
+    <video width="480" height="300" controls><source src="BulletBattle.mp4" type ="video/mp4">Your browser doesn't support the video tag</video>
+    <p>The intermediate product demonstrated in class</p>
+    <video width="480" height="300" controls><source src="FinishedProduct1.mp4" type ="video/mp4">Your browser doesn't support the video tag</video>
+    <video width="480" height="300" controls><source src="FinishedProduct2.mp4" type ="video/mp4">Your browser doesn't support the video tag</video>
+    <p>Playing a game of the finished product (Yes, there is a small bug where the first turret is sometimes invisible). The video is in two parts due to Github file size requirements</p>
+  </div>
+</div>
+
+<div class="w3-row-padding w3-padding-64 w3-container" id="Assignment 1">
+  <div class="w3-content">
+    While you may think this is the greatest thing since sliced bread this isn’t perfect, there are plenty of things could be improved. One is that the game looks different on different screen sizes. I spent a fair amount of time working getting to look somewhat consistent across devices, but it I only managed to ensure that it is at least playable on most devices. This involved messing with the Camera and making sure it scaled to the width of the screen, not the height. Furthermore, anchoring UI components to parts of the screen was necessary. However, this is not the only area for improvement. As mentioned earlier, health bars were added, but if you look carefully (depending on screen size) you can see the bars shrink from both directions which is not what I wanted but suffices for the purposes of the game. The most important part though is that the patterns generated still sometimes seem to be unavoidable, but this is offset by game mechanics. Another aspect that has been unmentioned until now is the patterns can be classified into types of patterns: for example, it is common to see bullets with a low speed while the rock is moving create a trail effect. If the acceleration, is high enough the bullets will start flying outward on a delay. Another common pattern is a ring type pattern. While there are slight variations the general patterns remain the same. There are certainly patterns that tend to crop up more than others which may become boring, so more ways to vary these in a visually pleasing manner may be another way to improve the game. Overall, it was a fun project and I hope it was at least interesting for you to read about!
+  </div>
+</div>
+
+
+<script>
+// Used to toggle the menu on small screens when clicking on the menu button
+function myFunction() {
+  var x = document.getElementById("navDemo");
+  if (x.className.indexOf("w3-show") == -1) {
+    x.className += " w3-show";
+  } else { 
+    x.className = x.className.replace(" w3-show", "");
+  }
+}
+</script>
+
+</body>
+</html>

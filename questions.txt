@@ -1,0 +1,22 @@
+        <h2>1. Demonstrate the final state of your project </h2>
+        <h2>2. Discuss the key algorithms and approaches you used. What were the computational  
+        bottlenecks to your approach? What would be the limiting factor to scaling up 10x or 100x 
+        bigger than what you turned in? </h2>
+        <h2> 3. Address any of the specific questions outlined in the description for the project you choose 
+            - Your game must be interactive and run in real-time.  
+            - You must explicitly discuss the connection between your game and topics from the course 
+            - For at least one of the aspects of your game, discuss what the related state-of-the-art techniques 
+          are and discuss how the methods you used relate to the state-of-the-art.  
+            - Discuss the interaction between the gameplay design choices, and the animation, simulation or 
+          planning techniques used to implement your game.
+        </h2>
+        <h2>4. Include an initial sketch of the project, plus an image of your project along the way and 
+        discuss in what ways progress was as you expected and in what ways progress went in 
+        unexpected directions. </h2>
+        <h2>5. Summarize the feedback you got from your peers during the progress report and discussed in 
+        what ways (if any) you addressed this feedback for the final version. </h2>
+        <h2>6. Highlight the relationship between your work (or the methods used by the tools you 
+        employed) and the state-of-the-art both seen in the papers you saw in your related work search 
+        and discussed elsewhere in class. </h2>
+        <h2>7. Suggest some directions the project could be extended in the future. What are the limitations 
+        of your current versions and how might you get pass them if given more time?</h2>
